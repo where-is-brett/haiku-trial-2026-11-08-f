@@ -51,6 +51,7 @@ import { categorize, CATEGORY_LABELS } from '../src/lib/categories.js';
 test('one shop from each category is sorted to that category', () => {
   assert.equal(categorize('Greenbarrow Fresh'), 'groceries');
   assert.equal(categorize('Kestrel Coffee Bar'), 'eating_out');
+  assert.equal(categorize('Pizza & Co'), 'eating_out');
   assert.equal(categorize('Waverly Fuel Stop'), 'transport');
   assert.equal(categorize('Brightfield Power'), 'bills');
   assert.equal(categorize('Marlowe Homewares'), 'shopping');
@@ -77,11 +78,17 @@ test('an empty or missing description is other', () => {
   assert.equal(categorize(undefined), 'other');
 });
 
-test('every category has a label', () => {
-  assert.deepEqual(Object.keys(CATEGORY_LABELS).sort(), [
-    'bills', 'eating_out', 'groceries', 'health', 'income', 'other', 'shopping', 'transport',
-  ]);
-  assert.equal(CATEGORY_LABELS.eating_out, 'Eating out');
+test('every category has its label', () => {
+  assert.deepEqual(CATEGORY_LABELS, {
+    groceries: 'Groceries',
+    eating_out: 'Eating out',
+    transport: 'Transport',
+    bills: 'Bills',
+    shopping: 'Shopping',
+    health: 'Health',
+    income: 'Income',
+    other: 'Other',
+  });
 });
 ```
 
@@ -118,5 +125,5 @@ git commit -m "feat: sort transactions into categories by shop name"
 1. **Spec coverage:** Keys and labels (Task 1 Produces, Global Constraints); case-insensitive contains-match (Step 3, lower-case test); unmatched → `other` (unmatched test); one shop per category, lower-case description and unmatched description tests (first, second and third tests). Shop table copied from the spec in Step 3. No gaps.
 2. **Step scan:** Every step names one action with a checkable result. Table values are pinned by the spec.
 3. **Type consistency:** `categorize` and `CATEGORY_LABELS` names are the same in the Interfaces block, tests and implementation.
-4. **Review Focus:** Each of the five lines is covered by a test in Step 1 (mid-string match, empty, null/undefined, lower and upper case). The `&` case is covered by the `pasta, pizza & co` test.
+4. **Review Focus:** Each of the five lines is covered by a test in Step 1 (mid-string match, empty, null/undefined, lower and upper case). The `&` case is checked alone (`Pizza & Co`) in the first test, and in combination in the case test.
 5. **Proportion:** One task; the plan is short and carries no implementation body beyond the tests.
