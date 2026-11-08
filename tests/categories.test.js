@@ -6,6 +6,7 @@ import { categorize, CATEGORY_LABELS } from '../src/lib/categories.js';
 test('one shop from each category is sorted to that category', () => {
   assert.equal(categorize('Greenbarrow Fresh'), 'groceries');
   assert.equal(categorize('Kestrel Coffee Bar'), 'eating_out');
+  assert.equal(categorize('Pizza & Co'), 'eating_out');
   assert.equal(categorize('Waverly Fuel Stop'), 'transport');
   assert.equal(categorize('Brightfield Power'), 'bills');
   assert.equal(categorize('Marlowe Homewares'), 'shopping');
@@ -32,9 +33,15 @@ test('an empty or missing description is other', () => {
   assert.equal(categorize(undefined), 'other');
 });
 
-test('every category has a label', () => {
-  assert.deepEqual(Object.keys(CATEGORY_LABELS).sort(), [
-    'bills', 'eating_out', 'groceries', 'health', 'income', 'other', 'shopping', 'transport',
-  ]);
-  assert.equal(CATEGORY_LABELS.eating_out, 'Eating out');
+test('every category has its label', () => {
+  assert.deepEqual(CATEGORY_LABELS, {
+    groceries: 'Groceries',
+    eating_out: 'Eating out',
+    transport: 'Transport',
+    bills: 'Bills',
+    shopping: 'Shopping',
+    health: 'Health',
+    income: 'Income',
+    other: 'Other',
+  });
 });

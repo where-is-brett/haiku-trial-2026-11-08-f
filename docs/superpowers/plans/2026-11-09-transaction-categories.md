@@ -1,7 +1,5 @@
 # Transaction categories by shop name Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Sort a transaction description into one of eight categories by the shop name it contains.
 
 **Architecture:** One pure module, `src/lib/categories.js`, holding a shop table and one lookup function. Matching lower-cases both sides and checks whether the description contains the shop name, so no regular expressions are involved and characters such as `&` need no escaping.
